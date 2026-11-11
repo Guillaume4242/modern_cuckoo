@@ -33,7 +33,7 @@ The result is a connected cuckoo clock that can be customized both mechanically 
 
 ## Required parts
 
-- ESP32 (with or without OLED screen). Any ESP32 can be used. I used for this project ESP-WROOM-32 ESP32 0.96
+- ESP32 (with or without OLED screen). Any ESP32 can be used. I used an ESP-WROOM-32 ESP32 0.96
 - SG90 servo motor
 - Passive buzzer
 - USB-C 5 V power source
@@ -44,7 +44,7 @@ The result is a connected cuckoo clock that can be customized both mechanically 
 ## Repository content
 
 ```
-modern-cuckoo/
+modern_cuckoo/
 ├── firmware/
 │   ├── main.py
 │   ├── boot.py
