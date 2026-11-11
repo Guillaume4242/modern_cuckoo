@@ -1,0 +1,37 @@
+Modern Cuckoo Clock
+Copyright (c) 2026 Guillaume Anfroy <g@anfroy.net>
+
+This work is licensed under the Creative Commons
+Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0).
+
+You are free to:
+  Share  - copy and redistribute the material in any medium or format.
+  Adapt  - remix, transform, and build upon the material.
+
+Under the following terms:
+  Attribution   - You must give appropriate credit to Guillaume Anfroy,
+                  provide a link to the license, and indicate if changes
+                  were made. You may do so in any reasonable manner, but
+                  not in any way that suggests the licensor endorses you
+                  or your use.
+
+  NonCommercial - You may not use the material for commercial purposes.
+                  Contact the author for any commercial use.
+
+  No additional restrictions - You may not apply legal terms or
+                  technological measures that legally restrict others
+                  from doing anything the license permits.
+
+Full license text:
+https://creativecommons.org/licenses/by-nc/4.0/legalcode
+
+Human-readable summary:
+https://creativecommons.org/licenses/by-nc/4.0/
+
+Third-party content
+-------------------
+This license applies only to the original work of the author. Third-party
+components remain under their own licenses and are credited in README.md:
+the 3D mechanism that inspired Plate 1 (DIYhans, Thingiverse), the cuckoo
+figures of Plate 4 (various sources, not included in this repository), and
+the ssd1306.py MicroPython driver.

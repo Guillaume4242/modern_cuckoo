@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Coucou</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0F1A17">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Coucou">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--bg:#0F1A17;--s1:#1A2A25;--s2:#27392F;--tx:#F2F0E8;--sb:#8DA399;--ac:#E3B04B;--on:#1A1407;--rd:#E5594B;--ln:rgba(255,255,255,.07);--nv:rgba(26,42,37,.82);--wood:#8A5A33;--wood2:#5A361B;--face:#F3E9D2;color-scheme:dark}
+:root.l{--bg:#EDF1EC;--s1:#fff;--s2:#E1E8E0;--tx:#15211D;--sb:#586B62;--ac:#B27A0E;--on:#fff;--ln:rgba(0,0,0,.08);--nv:rgba(255,255,255,.82);color-scheme:light}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+p{margin:0}
+#app{max-width:520px;margin:0 auto}
+.scr{display:none;padding:calc(10px + env(safe-area-inset-top)) 16px 170px}
+.scr.on{display:block;animation:in .42s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateX(calc(var(--d,1)*30px))}}
+h1{font-size:34px;line-height:1.1;letter-spacing:-.02em;margin:22px 4px 16px}
+h2{font-size:28px;line-height:1.15;letter-spacing:-.02em;margin:18px 0 8px}
+.sub{color:var(--sb);max-width:30ch}
+.gt{color:var(--sb);font-size:13px;margin:0 16px 7px}
+.g{background:var(--s1);border-radius:16px;overflow:hidden;margin:0 0 22px;text-align:left}
+.r{display:flex;align-items:center;gap:12px;padding:12px 16px;min-height:52px;border-top:1px solid var(--ln)}
+.g>:first-child{border-top:0}
+.r small{display:block;color:var(--sb);font-size:13px}
+.r b{font-weight:500}
+.r>b{min-width:3.6em}
+.v{margin-left:auto;color:var(--sb);font-size:15px;white-space:nowrap;background:none;border:0;padding:0}
+.r .v[data-t]{min-width:4.2em;text-align:right}
+button.r{width:100%;background:none;border:0;border-top:1px solid var(--ln);text-align:left;transition:background .2s}
+button.r:active{background:var(--s2)}
+.r input[type=text],.r input[type=password],.r input[type=number],.r select{flex:1;min-width:0;background:none;border:0;outline:0;color:var(--tx);font:inherit;text-align:right;-webkit-appearance:none;appearance:none}
+.r input[type=range]{flex:1;min-width:0}
+input[type=range]{-webkit-appearance:none;appearance:none;height:30px;background:none;margin:0}
+input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:linear-gradient(90deg,var(--ac) var(--p,0%),var(--s2) var(--p,0%))}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;margin-top:-10px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.4)}
+input[type=range]::-moz-range-track{height:6px;border-radius:3px;background:var(--s2)}
+input[type=range]::-moz-range-progress{height:6px;border-radius:3px;background:var(--ac)}
+input[type=range]::-moz-range-thumb{width:26px;height:26px;border:0;border-radius:50%;background:#fff}
+.sw{margin-left:auto;flex:none;width:51px;height:31px;border-radius:16px;border:0;background:var(--s2);position:relative;transition:background .25s}
+.sw i{position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.3);transition:transform .3s cubic-bezier(.3,1.5,.5,1),width .2s}
+.sw.on{background:var(--ac)}
+.sw.on i{transform:translateX(20px)}
+.sw:active i{width:33px}
+.sw.on:active i{transform:translateX(14px)}
+.bt{display:block;width:100%;border:0;border-radius:16px;padding:16px;font-weight:600;font-size:17px;background:var(--ac);color:var(--on);transition:transform .15s}
+.bt:active{transform:scale(.97)}
+.bt.gh{background:var(--s1);color:var(--tx)}
+.bt.rd{background:var(--rd);color:#fff}
+.bt+.bt{margin-top:10px}
+.nt{border-left:3px solid var(--ac);padding:2px 0 2px 12px;color:var(--sb);font-size:14px;margin:0 4px 18px}
+.seg{display:flex;background:var(--s1);border-radius:12px;padding:3px;margin-bottom:22px}
+.seg button{flex:1;border:0;background:none;padding:8px;border-radius:10px;transition:background .25s}
+.seg button.on{background:var(--s2);box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.ft{text-align:center;color:var(--sb);font-size:13px}
+.col{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s cubic-bezier(.2,.8,.2,1)}
+.col.open{grid-template-rows:1fr}
+.col>div{overflow:hidden;min-height:0}
+.stg{display:none}
+.stg.show{display:block;animation:in .4s}
+.hero{display:flex;flex-direction:column;align-items:center;padding:4px 0 22px;text-align:center}
+#tm{font-size:54px;font-weight:700;letter-spacing:-.03em;font-variant-numeric:tabular-nums;line-height:1;margin-top:18px}
+#dt{color:var(--sb);margin-top:6px}
+#dt::first-letter{text-transform:uppercase}
+.hc{display:flex;justify-content:center;width:100%}
+.clk{width:min(58vw,220px);height:auto;overflow:visible;filter:drop-shadow(0 16px 22px rgba(0,0,0,.35))}
+.w1{fill:var(--wood)}.w2{fill:var(--wood2)}.acf{fill:var(--ac)}.acs{stroke:var(--ac)}.bf{fill:var(--rd)}
+.fc{fill:var(--face);stroke:var(--wood2);stroke-width:5}
+.ink{stroke:#2A1A0C}
+.pd{transform-origin:100px 216px;animation:sw 2s ease-in-out infinite alternate}
+@keyframes sw{from{transform:rotate(-11deg)}to{transform:rotate(11deg)}}
+.dl,.dr,.bi,.bub{transition:transform .38s cubic-bezier(.3,1.4,.5,1),opacity .3s}
+.dl{transform-origin:80px 68px}.dr{transform-origin:120px 68px}
+.bi{transform-origin:100px 72px}
+.bub{opacity:0;transform:scale(.5);transform-origin:128px 34px}
+.open .dl,.open .dr{transform:scaleX(.06)}
+.open .bi{transform:translateY(-8px) scale(1.4)}
+.open .bub{opacity:1;transform:none}
+.clk.open{animation:shk .5s}
+@keyframes shk{25%{transform:rotate(-2.5deg)}60%{transform:rotate(2deg)}}
+.ps{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x proximity;margin:0 -16px 22px;padding:2px 16px;scrollbar-width:none}
+.ps::-webkit-scrollbar{display:none}
+.ps button{flex:none;scroll-snap-align:start;min-width:132px;text-align:left;padding:12px 14px;border-radius:16px;border:1.5px solid var(--ln);background:var(--s1);transition:border-color .25s,background .25s,transform .15s}
+.ps button:active{transform:scale(.96)}
+.ps button.on{border-color:var(--ac);background:var(--s2)}
+.ps small{display:block;color:var(--sb);font-size:12px}
+.ps.tp button{min-width:76px;text-align:center}
+.eq{display:flex;align-items:flex-end;justify-content:center;gap:12px;height:76px;margin:16px 0 8px}
+.eq i{width:28px;border-radius:9px 9px 4px 4px;background:var(--ac);height:var(--h,40%);transform-origin:bottom;transition:height .4s cubic-bezier(.3,1.4,.5,1)}
+.eq.play i{animation:bp .55s ease-in-out both}
+.eq i:nth-child(2){animation-delay:.3s}.eq i:nth-child(3){animation-delay:.6s}.eq i:nth-child(4){animation-delay:.9s}
+@keyframes bp{40%{transform:scaleY(1.22);filter:brightness(1.35)}}
+nav{position:fixed;left:50%;bottom:max(10px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(500px,calc(100% - 20px));display:flex;padding:6px;border-radius:26px;background:var(--nv);-webkit-backdrop-filter:blur(20px) saturate(1.6);backdrop-filter:blur(20px) saturate(1.6);border:1px solid var(--ln);z-index:20}
+nav button{flex:1;position:relative;z-index:1;background:none;border:0;color:var(--sb);padding:8px 0 6px;font-size:11px;display:flex;flex-direction:column;align-items:center;gap:2px;transition:color .25s}
+nav button.on{color:var(--ac)}
+nav svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#ind{position:absolute;top:6px;bottom:6px;left:6px;width:calc((100% - 12px)/5);border-radius:20px;background:var(--s2);transition:transform .45s cubic-bezier(.3,1.3,.5,1)}
+#sv{position:fixed;left:50%;bottom:calc(88px + env(safe-area-inset-bottom));transform:translate(-50%,40px) scale(.9);opacity:0;pointer-events:none;transition:transform .4s cubic-bezier(.3,1.4,.5,1),opacity .25s;background:var(--tx);color:var(--bg);padding:8px 8px 8px 18px;border-radius:30px;display:flex;gap:14px;align-items:center;font-size:15px;z-index:19;white-space:nowrap}
+#sv.on{transform:translate(-50%,0);opacity:1;pointer-events:auto}
+#sv button{border:0;border-radius:20px;background:var(--ac);color:var(--on);font-weight:600;padding:8px 16px}
+#ts{position:fixed;top:calc(10px + env(safe-area-inset-top));left:50%;transform:translate(-50%,-110px);background:var(--tx);color:var(--bg);padding:11px 20px;border-radius:24px;font-size:15px;font-weight:500;z-index:80;transition:transform .5s cubic-bezier(.3,1.4,.5,1);max-width:calc(100% - 32px);text-align:center}
+#ts.on{transform:translate(-50%,0)}
+#ts.er{background:var(--rd);color:#fff}
+#sh{position:fixed;inset:0;z-index:40;pointer-events:none}
+#sh.on{pointer-events:auto}
+#sh .bk{position:absolute;inset:0;background:rgba(0,0,0,.5);opacity:0;transition:opacity .3s}
+#sh.on .bk{opacity:1}
+#sh .pn{position:absolute;left:0;right:0;bottom:0;max-width:520px;margin:0 auto;background:var(--s1);border-radius:26px 26px 0 0;padding:24px 20px calc(20px + env(safe-area-inset-bottom));transform:translateY(105%);transition:transform .45s cubic-bezier(.2,.9,.2,1)}
+#sh.on .pn{transform:none}
+#sh h3{margin:0 0 6px;font-size:20px}
+#sh p{color:var(--sb);margin-bottom:18px}
+#rb{position:fixed;inset:0;z-index:70;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;gap:22px;text-align:center;padding:30px}
+#rb.on{display:flex;animation:in .4s}
+#rb i{width:46px;height:46px;border-radius:50%;border:4px solid var(--s2);border-top-color:var(--ac);animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+#ob{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;flex-direction:column;transition:opacity .5s,transform .6s cubic-bezier(.7,0,.2,1)}
+#ob[hidden]{display:none}
+#ob.out{opacity:0;transform:translateY(30px) scale(.98);pointer-events:none}
+#obs{position:absolute;top:calc(14px + env(safe-area-inset-top));right:18px;background:none;border:0;color:var(--sb);padding:8px;z-index:2}
+#stp{flex:1;position:relative;overflow:hidden;width:100%;max-width:520px;margin:0 auto}
+.st{position:absolute;inset:0;padding:calc(50px + env(safe-area-inset-top)) 22px 16px;overflow:auto;display:flex;flex-direction:column;align-items:center;text-align:center;opacity:0;transform:translateX(60px);transition:opacity .5s,transform .55s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+.st.on{opacity:1;transform:none;pointer-events:auto}
+.st.pv{transform:translateX(-60px)}
+.st .g,.st .ps{width:100%}
+.st .ps{margin:0 0 18px;padding:2px 0}
+#ob .clk{width:min(66vw,250px)}
+#gr{font-size:50px;font-weight:700;letter-spacing:-.03em;line-height:1.2;margin:18px 0 6px;transition:opacity .38s,transform .38s}
+#gr.f{opacity:0;transform:translateY(12px)}
+#obf{width:100%;max-width:520px;margin:0 auto;padding:12px 22px calc(18px + env(safe-area-inset-bottom))}
+.dots{display:flex;gap:8px;justify-content:center;margin-bottom:16px}
+.dots i{width:8px;height:8px;border-radius:4px;background:var(--s2);transition:width .4s cubic-bezier(.3,1.4,.5,1),background .3s}
+.dots i.on{width:24px;background:var(--ac)}
+.c1,.c2{fill:none;stroke:var(--ac);stroke-linecap:round;stroke-linejoin:round}
+.c1{stroke-width:3;stroke-dasharray:151;stroke-dashoffset:151}
+.c2{stroke-width:3.5;stroke-dasharray:40;stroke-dashoffset:40}
+.st.on .c1{animation:dr .8s .25s cubic-bezier(.5,0,.2,1) forwards}
+.st.on .c2{animation:dr .4s .95s ease-out forwards}
+@keyframes dr{to{stroke-dashoffset:0}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div id="app">
+
+<section class="scr on" id="s0">
+<h1>Modern Cuckoo</h1>
+
+<div class="ap-banner" style="display:none; background:var(--rd); color:#fff; padding:14px 16px; border-radius:14px; margin-bottom:18px; font-size:14px; text-align:center; line-height:1.5;">
+    <b data-i="ap1"></b><br>
+    <span data-i="ssidl"></span> <b>Cuckoo_Config</b><br>
+    <small style="opacity:0.9;" data-i="ap2"></small>
+</div>
+
+<div class="hero">
+<div class="hc" data-ins="clock"></div>
+<div id="tm"></div>
+<div id="dt"></div>
+</div>
+<button class="bt" data-a="coucou" data-i="trigger" style="margin-bottom:22px"></button>
+<div class="g">
+<div class="r"><b data-i="next"></b><span class="v" id="nx"></span></div>
+<button class="r" data-a="starwars"><b data-i="starwars"></b></button>
+<button class="r" data-a="settime"><div><b data-i="settime"></b><small data-i="settime_s"></small></div></button>
+</div>
+<div class="gt" data-i="manual"></div>
+<div class="g">
+<button class="r" data-a="hold_out"><b data-i="hold_out"></b></button>
+<button class="r" data-a="pull_in"><b data-i="pull_in"></b></button>
+</div>
+<div class="gt" data-i="timer"></div>
+<div class="ps tp">
+<button data-a="tpre" data-v="5"><b>5</b><small>min</small></button>
+<button data-a="tpre" data-v="10"><b>10</b><small>min</small></button>
+<button data-a="tpre" data-v="15"><b>15</b><small>min</small></button>
+<button data-a="tpre" data-v="30"><b>30</b><small>min</small></button>
+<button data-a="tpre" data-v="60"><b>60</b><small>min</small></button>
+</div>
+<div class="g">
+<div class="r"><b data-i="tm_left"></b><span class="v" id="tl">—</span></div>
+<label class="r"><b data-i="tm_min"></b><input type="number" id="tmin" min="1" max="600" step="1" inputmode="numeric" value="10" data-ia="tm_min"></label>
+<button class="r" data-a="timer"><b id="tbt"></b></button>
+</div>
+<div class="stg" id="stg">
+<div class="gt" data-i="state"></div>
+<div class="g">
+<div class="r"><b data-i="s_time"></b><span class="v" id="s-t"></span></div>
+<div class="r"><b data-i="s_temp"></b><span class="v" id="s-w"></span></div>
+<div class="r"><b data-i="s_hum"></b><span class="v" id="s-h"></span></div>
+<div class="r"><b data-i="s_wifi"></b><span class="v" id="s-r"></span></div>
+<div class="r"><b data-i="s_up"></b><span class="v" id="s-u"></span></div>
+<div class="r"><b data-i="s_cpu"></b><span class="v" id="s-c"></span></div>
+<div class="r"><b data-i="s_total"></b><span class="v" id="s-total"></span></div>
+<div class="r"><b data-i="s_dist"></b><span class="v" id="s-dist"></span></div>
+</div>
+</div>
+</section>
+
+<section class="scr" id="s1">
+<h1 data-i="sounds"></h1>
+<div class="gt" data-i="presets_t"></div>
+<div class="ps" data-ins="presets"></div>
+<div class="gt" data-i="fine"></div>
+<div class="g" data-ins="gnotes"></div>
+<button class="bt" data-a="test" data-i="listen"></button>
+</section>
+
+<section class="scr" id="s2">
+<h1 data-i="options"></h1>
+<div class="g" data-ins="gnight"></div>
+<div class="g" data-ins="gopts"></div>
+</section>
+
+<section class="scr" id="s3">
+<h1 data-i="wifi"></h1>
+<div class="ap-banner" style="display:none; background:var(--rd); color:#fff; padding:14px 16px; border-radius:14px; margin-bottom:18px; font-size:14px; text-align:center; line-height:1.5;">
+    <b data-i="ap1"></b><br>
+    <span data-i="ssidl"></span> <b>Cuckoo_Config</b><br>
+    <small style="opacity:0.9;" data-i="ap2"></small>
+</div>
+<div class="gt" data-i="addr"></div>
+<div class="g">
+<button class="r" data-a="copy" data-v="host"><div><b data-i="addr_net"></b><small data-t="host"></small></div><span class="v" data-i="copy"></span></button>
+<button class="r" data-a="copy" data-v="http://192.168.4.1"><div><b data-i="addr_ap"></b><small>http://192.168.4.1</small></div><span class="v" data-i="copy"></span></button>
+</div>
+<div class="gt" data-i="network"></div>
+<div class="g">
+<label class="r"><b data-i="name"></b><input type="text" data-k="ssid" autocapitalize="off" autocomplete="off" spellcheck="false" data-ia="name_aria"></label>
+<label class="r"><b data-i="pass"></b><input type="password" id="pw" data-k="password" autocapitalize="off" autocomplete="off" data-ia="pass"><button type="button" class="v" data-a="eye" id="eye"></button></label>
+</div>
+<p class="nt" data-i="wifi_note"></p>
+<button class="bt" data-a="wifi" data-i="wifi_save"></button>
+</section>
+
+<section class="scr" id="s4">
+<h1 data-i="system"></h1>
+<div class="gt" data-i="look"></div>
+<div class="seg" id="th"><button data-a="th" data-v="auto" data-i="auto"></button><button data-a="th" data-v="l" data-i="light"></button><button data-a="th" data-v="d" data-i="dark"></button></div>
+<div class="gt" data-i="lang"></div>
+<div class="seg" id="lg"><button data-a="lg" data-v="auto" data-i="auto"></button><button data-a="lg" data-v="fr">Français</button><button data-a="lg" data-v="en">English</button></div>
+<div class="gt" data-i="cuckoo_g"></div>
+<div class="g">
+<button class="r" data-a="replay"><b data-i="replay"></b></button>
+<button class="r" data-a="rebootask"><b style="color:var(--rd)" data-i="reboot_btn"></b></button>
+</div>
+<p class="ft" data-i="foot"></p>
+</section>
+
+</div>
+
+<nav data-ia="menu"></nav>
+<div id="sv"><span data-i="unsaved"></span><button data-a="save" data-i="save"></button></div>
+<div id="ts" role="status"></div>
+
+<div id="sh"><div class="bk" data-a="shut"></div><div class="pn"><h3 id="sh-t"></h3><p id="sh-s"></p><button id="sh-ok" class="bt"></button><button class="bt gh" data-a="shut" data-i="cancel"></button></div></div>
+<div id="rb"><i></i><h2 data-i="rb_t"></h2><p class="sub" data-i="rb_s"></p></div>
+
+<div id="ob" hidden>
+<button id="obs" data-a="skip" data-i="later"></button>
+<div id="stp">
+<div class="st on" style="justify-content:center">
+<div class="hc" data-ins="clock"></div>
+<div id="gr">Coucou</div>
+<p class="sub" data-i="ob0"></p>
+</div>
+<div class="st">
+<h2 data-i="ob1_t"></h2>
+<p class="sub" style="margin-bottom:18px" data-i="ob1_s"></p>
+<div class="ps" data-ins="presets"></div>
+<div class="g" data-ins="gvol"></div>
+<button class="bt gh" data-a="test" data-i="listen"></button>
+<details class="g" style="margin-top:12px">
+  <summary class="r" style="cursor:pointer">
+    <b data-i="notes_ref"></b>
+  </summary>
+
+  <div style="padding:12px 16px;line-height:1.8">
+    Do (C) = 262 Hz<br>
+    Ré (D) = 294 Hz<br>
+    Mi (E) = 330 Hz<br>
+    Fa (F) = 349 Hz<br>
+    Sol (G) = 392 Hz<br>
+    La (A) = 440 Hz<br>
+    Si (B) = 494 Hz<br>
+    <br>
+    Do+ (C5) = 523 Hz<br>
+    Ré+ (D5) = 587 Hz<br>
+    Mi+ (E5) = 659 Hz<br>
+    Fa+ (F5) = 698 Hz<br>
+    Sol+ (G5) = 784 Hz<br>
+    La+ (A5) = 880 Hz<br>
+    Si+ (B5) = 988 Hz
+  </div>
+</details>
+
+</div>
+<div class="st">
+<h2 data-i="ob2_t"></h2>
+<p class="sub" style="margin-bottom:18px" data-i="ob2_s"></p>
+<div class="g" data-ins="gall"></div>
+</div>
+<div class="st" style="justify-content:center">
+<svg viewBox="0 0 52 52" width="100" height="100" aria-hidden="true"><circle class="c1" cx="26" cy="26" r="24"/><path class="c2" d="M15 27l8 8 15-17"/></svg>
+<h2 data-i="ob3_t"></h2>
+<p class="sub" data-i="ob3_s"></p>
+</div>
+</div>
+<div id="obf"><div class="dots"><i class="on"></i><i></i><i></i><i></i></div><button class="bt" id="obn" data-a="next"></button></div>
+</div>
+
+<script>
+let S = {};
+const $=(q,e=document)=>e.querySelector(q),$$=(q,e=document)=>[...e.querySelectorAll(q)];
+const pad=n=>String(n).padStart(2,'0');
+const ST={g(k){try{return localStorage.getItem(k)}catch(e){return null}},s(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+const SK=['b1','b2','b3','b4','volume','night','half','oled','weather','ns','ne'];
+let dirty=false,inOb=false,cur=0,st=0,gi=0,gt,tt,L='fr',LP='auto';
+
+/* ---------- Traductions / Translations ---------- */
+const D={
+fr:{
+title:'Coucou',
+ap1:'⚠️ Mode point d’accès (AP) actif',ssidl:'SSID :',
+ap2:'L’heure ne peut pas être synchronisée automatiquement au redémarrage sans connexion Internet.',
+trigger:'Faire sortir le coucou',next:'Prochain coucou',starwars:'Jouer la mélodie Star Wars',
+settime:'Régler l’heure',settime_s:'Utilise l’heure de ce téléphone',
+state:'État du coucou',s_time:'Heure du coucou',s_temp:'Température dehors',s_hum:'Humidité dehors',s_wifi:'Signal Wi‑Fi',s_up:'Allumé depuis',s_cpu:'Température interne',s_total:'Nombre total de coucous',s_dist:'Distance totale parcourue',
+manual:'Commande manuelle',hold_out:'Sortir le coucou et le laisser dehors',pull_in:'Rentrer le coucou',t_out:'Coucou sorti',t_in:'Coucou rentré',
+timer:'Minuteur',tm_left:'Temps restant',tm_min:'Durée (min)',tm_start:'Lancer le minuteur',tm_cancel:'Annuler le minuteur',
+tm_set:'Minuteur réglé : {0} min',tm_cancelled:'Minuteur annulé',tm_done:'Minuteur terminé',
+sounds:'Sons',presets_t:'Chants prédéfinis',fine:'Réglage fin',listen:'Écouter',notes_ref:'🎹 Correspondance notes ↔ fréquences',options:'Options',wifi:'Wi‑Fi',
+addr:'Adresses du coucou',addr_net:'Sur votre réseau',addr_ap:'Mode point d’accès',copy:'Copier',
+network:'Réseau',name:'Nom',name_aria:'Nom du réseau',pass:'Mot de passe',show:'Afficher',hide:'Masquer',
+wifi_note:'Le nom et le mot de passe sont écrits dans secrets.py. Un redémarrage est nécessaire. Si les identifiants sont invalides, le coucou repasse en mode point d’accès.',
+wifi_save:'Enregistrer le Wi‑Fi',
+system:'Système',look:'Apparence',auto:'Auto',light:'Clair',dark:'Sombre',lang:'Langue',cuckoo_g:'Coucou',
+replay:'Revoir l’assistant de configuration',reboot_btn:'Redémarrer l’ESP32',foot:'Coucou fait maison, ESP32 et MicroPython',
+menu:'Menu',tab_home:'Accueil',unsaved:'Modifications non enregistrées',save:'Enregistrer',cancel:'Annuler',
+rb_t:'Redémarrage en cours',rb_s:'Le coucou revient dans quelques secondes. Cette page se rechargera toute seule.',
+later:'Plus tard',ob0:'Réglons votre horloge en trois étapes. Cela prend une minute.',
+ob1_t:'Choisissez son chant',ob1_s:'Vous pourrez le changer à tout moment.',
+ob2_t:'Quand doit-il chanter ?',ob2_s:'Ces options se règlent aussi plus tard.',
+ob3_t:'Tout est prêt',ob3_s:'Un dernier appui et le coucou applique vos réglages.',
+ob_btn0:'Commencer',ob_btn1:'Continuer',ob_btn3:'Enregistrer et terminer',
+clk_aria:'Horloge à coucou',bubble:'Coucou !',
+pre_classic:'Classique',pre_son:'Mon fils',pre_chime:'Carillon',pre_alarm:'Alarme',
+night:'Mode nuit',night_sub:'Silencieux de',night_range:'{0}:00 à {1}:00',
+half:'Coucou à la demi-heure',half_s:'Une sortie à chaque :30',
+oled:'Écran OLED',oled_s:'Allume l’écran du coucou',
+weather:'Météo',weather_s:'Météo extérieure récupérée en ligne',
+from:'De',until:'Jusqu’à',note:'Note {0}',volume:'Volume',
+nx_in:'dans {0} min',nx_at:'à {0}',
+err_offline:'Le coucou ne répond pas',force:'Que la Force soit avec vous',
+wifi_saved_t:'Wi‑Fi enregistré',wifi_saved_s:'Redémarrez le coucou pour qu’il se connecte à ce réseau.',
+reboot_now:'Redémarrer maintenant',time_sent:'Heure envoyée au coucou',copied:'Adresse copiée',saved:'Réglages enregistrés',
+cfg_err:'Erreur de chargement config',
+rb_ask_t:'Redémarrer le coucou ?',rb_ask_s:'Il sera indisponible quelques secondes.',rb_ask_ok:'Redémarrer',
+rssi_ex:'Excellent',rssi_ok:'Correct',rssi_weak:'Faible'
+},
+en:{
+title:'Cuckoo',
+ap1:'⚠️ Access Point (AP) Mode Active',ssidl:'SSID:',
+ap2:'Time cannot be automatically synchronized upon reboot without an internet connection.',
+trigger:'Make the cuckoo come out',next:'Next cuckoo',starwars:'Play the Star Wars melody',
+settime:'Set the time',settime_s:'Uses this phone’s time',
+state:'Cuckoo status',s_time:'Cuckoo time',s_temp:'Outside temperature',s_hum:'Outside humidity',s_wifi:'Wi‑Fi signal',s_up:'Powered on for',s_cpu:'Internal temperature',s_total:'Lifetime Cuckoos',s_dist:'Estimated Flying Distance',
+manual:'Manual control',hold_out:'Bring the cuckoo out and leave it out',pull_in:'Bring the cuckoo back in',t_out:'Cuckoo is out',t_in:'Cuckoo is back in',
+timer:'Timer',tm_left:'Time left',tm_min:'Duration (min)',tm_start:'Start the timer',tm_cancel:'Cancel the timer',
+tm_set:'Timer set: {0} min',tm_cancelled:'Timer cancelled',tm_done:'Timer finished',
+sounds:'Sounds',presets_t:'Preset songs',fine:'Fine tuning',listen:'Listen',notes_ref:'🎹 Musical notes reference',options:'Options',wifi:'Wi‑Fi',
+addr:'Cuckoo addresses',addr_net:'On your network',addr_ap:'Access point mode',copy:'Copy',
+network:'Network',name:'Name',name_aria:'Network name',pass:'Password',show:'Show',hide:'Hide',
+wifi_note:'The name and password are written to secrets.py. A reboot is required. If the credentials are invalid, the cuckoo falls back to access point mode.',
+wifi_save:'Save Wi‑Fi',
+system:'System',look:'Appearance',auto:'Auto',light:'Light',dark:'Dark',lang:'Language',cuckoo_g:'Cuckoo',
+replay:'Run the setup assistant again',reboot_btn:'Restart the ESP32',foot:'Homemade cuckoo, ESP32 and MicroPython',
+menu:'Menu',tab_home:'Home',unsaved:'Unsaved changes',save:'Save',cancel:'Cancel',
+rb_t:'Restarting',rb_s:'The cuckoo will be back in a few seconds. This page will reload by itself.',
+later:'Later',ob0:'Let’s set up your clock in three steps. It takes a minute.',
+ob1_t:'Choose its song',ob1_s:'You can change it at any time.',
+ob2_t:'When should it sing?',ob2_s:'These options can also be changed later.',
+ob3_t:'All set',ob3_s:'One last tap and the cuckoo applies your settings.',
+ob_btn0:'Get started',ob_btn1:'Continue',ob_btn3:'Save and finish',
+clk_aria:'Cuckoo clock',bubble:'Cuckoo!',
+pre_classic:'Classic',pre_son:'My son',pre_chime:'Chime',pre_alarm:'Alarm',
+night:'Night mode',night_sub:'Silent from',night_range:'{0}:00 to {1}:00',
+half:'Cuckoo on the half hour',half_s:'One appearance at every :30',
+oled:'OLED screen',oled_s:'Turns on the cuckoo’s screen',
+weather:'Weather',weather_s:'Outside weather fetched online',
+from:'From',until:'Until',note:'Note {0}',volume:'Volume',
+nx_in:'in {0} min',nx_at:'at {0}',
+err_offline:'The cuckoo is not responding',force:'May the Force be with you',
+wifi_saved_t:'Wi‑Fi saved',wifi_saved_s:'Restart the cuckoo so it connects to this network.',
+reboot_now:'Restart now',time_sent:'Time sent to the cuckoo',copied:'Address copied',saved:'Settings saved',
+cfg_err:'Error loading config',
+rb_ask_t:'Restart the cuckoo?',rb_ask_s:'It will be unavailable for a few seconds.',rb_ask_ok:'Restart',
+rssi_ex:'Excellent',rssi_ok:'Fair',rssi_weak:'Weak'
+}};
+const detect=()=>((navigator.language||'fr').toLowerCase().startsWith('fr')?'fr':'en');
+const tr=(k,...a)=>{let s=(D[L]&&D[L][k]!==undefined)?D[L][k]:(D.fr[k]!==undefined?D.fr[k]:k);a.forEach((v,i)=>{s=s.split('{'+i+'}').join(v)});return s};
+
+const IC={clock:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 3h6"/>',note:'<path d="M9 18V6l10-2v12"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="16" r="2"/>',sliders:'<path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/>',wifi:'<path d="M2.5 9a14 14 0 0 1 19 0M5.5 12.5a9.5 9.5 0 0 1 13 0M8.8 16a5 5 0 0 1 6.4 0M12 19.5h.01"/>',power:'<path d="M12 3v8M6.8 6.6a8 8 0 1 0 10.4 0"/>'};
+const TABS=[['tab_home','clock'],['sounds','note'],['options','sliders'],['wifi','wifi'],['system','power']];
+
+const CK=()=>`<svg class="clk" viewBox="0 0 200 250" role="img" aria-label="${tr('clk_aria')}"><g class="pd"><path class="acs" d="M100 216V238" stroke-width="2.5"/><circle class="acf" cx="100" cy="241" r="8"/></g><path class="w2" d="M14 98 100 22 186 98Z"/><rect class="w1" x="34" y="92" width="132" height="124" rx="12"/><rect x="80" y="50" width="40" height="36" rx="6" fill="#1b0f06"/><g class="bi"><ellipse class="bf" cx="98" cy="73" rx="13" ry="9"/><circle class="bf" cx="108" cy="64" r="6.5"/><path class="acf" d="M113 62.5 124 66 113 68.5Z"/><circle cx="109.5" cy="63" r="1.5" fill="#111"/></g><rect class="dl w2" x="80" y="50" width="20" height="36" rx="3"/><rect class="dr w2" x="100" y="50" width="20" height="36" rx="3"/><circle class="fc" cx="100" cy="152" r="38"/><circle cx="100" cy="152" r="31" fill="none" stroke="#2A1A0C" stroke-width="5" stroke-dasharray="1.6 14.63" transform="rotate(-90 100 152)"/><line class="hh ink" x1="100" y1="152" x2="100" y2="136" stroke-width="4" stroke-linecap="round"/><line class="mh ink" x1="100" y1="152" x2="100" y2="127" stroke-width="3" stroke-linecap="round"/><line class="sh" x1="100" y1="156" x2="100" y2="123" stroke="#E5594B" stroke-width="1.6" stroke-linecap="round"/><circle class="acf" cx="100" cy="152" r="3.5"/><g class="bub"><rect class="acf" x="128" y="4" width="68" height="30" rx="15"/><text x="162" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#1A1407">${tr('bubble')}</text></g></svg>`;
+
+const PRE=[['pre_classic',[660,580,660,580]],['pre_son',[262,262,262,146]],['pre_chime',[523,659,784,1047]],['pre_alarm',[880,440,880,440]]];
+const tg=(k,ti,s)=>`<div class="r"><div><b>${ti}</b><small>${s}</small></div><button class="sw" data-k="${k}" role="switch" aria-label="${ti}"><i></i></button></div>`;
+const HR=Array.from({length:24},(_,i)=>`<option value="${i}">${pad(i)}:00</option>`).join('');
+const eq='<div class="eq"><i></i><i></i><i></i><i></i></div>';
+const vol=()=>`<div class="r"><b>${tr('volume')}</b><input type="range" min="0" max="1022" data-k="volume" aria-label="${tr('volume')}"><span class="v" data-t="volume"></span></div>`;
+const INS=()=>{
+const T={night:tg('night',tr('night'),tr('night_sub')+' <span data-n></span>'),half:tg('half',tr('half'),tr('half_s')),oled:tg('oled',tr('oled'),tr('oled_s')),weather:tg('weather',tr('weather'),tr('weather_s'))};
+const v=vol();
+return{
+clock:CK(),
+presets:PRE.map(p=>`<button data-p="${p[1]}"><b>${tr(p[0])}</b><small>${p[1].join(' ')}</small></button>`).join(''),
+gnotes:eq+[1,2,3,4].map(n=>`<div class="r"><b>${tr('note',n)}</b><input type="range" min="100" max="1500" data-k="b${n}" aria-label="${tr('note',n)}"><span class="v" data-t="b${n}"></span></div>`).join('')+v,
+gvol:eq+v,
+gnight:T.night+'<div class="col"><div><label class="r"><b>'+tr('from')+'</b><select data-k="ns">'+HR+'</select></label><label class="r"><b>'+tr('until')+'</b><select data-k="ne">'+HR+'</select></label></div></div>',
+gopts:T.half+T.oled+T.weather,
+gall:T.night+T.half+T.oled+T.weather
+}};
+
+function renderNav(){
+$('nav').innerHTML='<i id="ind"></i>'+TABS.map((t,i)=>`<button data-tab="${i}"${i==cur?' class="on"':''}><svg viewBox="0 0 24 24" aria-hidden="true">${IC[t[1]]}</svg>${tr(t[0])}</button>`).join('');
+$('#ind').style.transform='translateX('+cur*100+'%)'}
+function eyeTxt(){const p=$('#pw'),b=$('#eye');if(p&&b)b.textContent=tr(p.type=='password'?'show':'hide')}
+function obLabel(){$('#obn').textContent=tr(['ob_btn0','ob_btn1','ob_btn1','ob_btn3'][st])}
+
+function applyI18n(){
+document.documentElement.lang=L;document.title=tr('title');
+const m=$('meta[name="apple-mobile-web-app-title"]');if(m)m.content=tr('title');
+$$('[data-i]').forEach(e=>e.textContent=tr(e.dataset.i));
+$$('[data-ia]').forEach(e=>e.setAttribute('aria-label',tr(e.dataset.ia)));
+const it=INS();$$('[data-ins]').forEach(e=>e.innerHTML=it[e.dataset.ins]);
+renderNav();eyeTxt();obLabel();tmrUI();
+$$('#lg button').forEach(b=>b.classList.toggle('on',b.dataset.v==LP))}
+function lang(p){LP=p;ST.s('cuckoo_lang',p);L=p=='auto'?detect():p;applyI18n();if('volume' in S)sync();tick()}
+
+const buzz=()=>navigator.vibrate&&navigator.vibrate(8);
+const fmt=k=>k=='volume'?Math.round(S.volume/10.23)+' %':(k[0]=='b'&&k.length==2)?S[k]+' Hz':k=='host'?'http://'+S.host+'.local':S[k];
+
+function set(k,v){if(S[k]===v)return;S[k]=v;if(SK.includes(k))dirty=true;sync()}
+
+function sync(){
+    $$('[data-k]').forEach(e=>{const k=e.dataset.k,v=S[k];
+    if(e.classList.contains('sw')){e.classList.toggle('on',!!v);e.setAttribute('aria-checked',!!v)}
+    else{if(String(e.value)!==String(v))e.value=v;if(e.type=='range')e.style.setProperty('--p',(v-e.min)/(e.max-e.min)*100+'%')}});
+
+    // Toggle AP Mode banners visibility
+    $$('.ap-banner').forEach(b=>b.style.display=S.ap_mode?'block':'none');
+
+    $$('[data-t]').forEach(e=>e.textContent=fmt(e.dataset.t));
+    $$('[data-n]').forEach(e=>e.textContent=tr('night_range',pad(S.ns),pad(S.ne)));
+    $$('.col').forEach(e=>e.classList.toggle('open',!!S.night));
+    $$('.eq').forEach(q=>$$('i',q).forEach((b,i)=>b.style.setProperty('--h',Math.max(14,Math.min(100,S['b'+(i+1)]/15))+'%')));
+    const c=[S.b1,S.b2,S.b3,S.b4].join();
+    $$('[data-p]').forEach(b=>b.classList.toggle('on',b.dataset.p==c));
+    $('#sv').classList.toggle('on',dirty&&!inOb);
+    nx();
+}
+
+function nx(){
+const e=$('#nx'),d=new Date();let t=new Date(d);t.setSeconds(0,0);
+for(let i=0;i<2900;i++){
+t=new Date(t.getTime()+6e4);const m=t.getMinutes(),h=t.getHours();
+if(m&&!(m==30&&S.half))continue;
+if(S.night&&(S.ns>S.ne?(h>=S.ns||h<S.ne):(h>=S.ns&&h<S.ne)))continue;
+const mn=Math.round((t-d)/6e4);e.textContent=mn<60?tr('nx_in',mn):tr('nx_at',pad(h)+':'+pad(m));return}
+e.textContent='—'}
+
+function tick(){
+const d=new Date(),s=d.getSeconds(),m=d.getMinutes(),h=d.getHours();
+const rot=(c,a)=>$$(c).forEach(e=>e.setAttribute('transform','rotate('+a+' 100 152)'));
+rot('.hh',(h%12)*30+m/2);rot('.mh',m*6+s/10);rot('.sh',s*6);
+$('#tm').textContent=pad(h)+':'+pad(m);
+$('#dt').textContent=d.toLocaleDateString(L=='fr'?'fr-FR':'en-GB',{weekday:'long',day:'numeric',month:'long'});
+if(s==0)nx()}
+setInterval(tick,1000);tick();
+
+function cuckoo(){buzz();$$('.clk').forEach(c=>{c.classList.remove('open');void c.getBoundingClientRect();c.classList.add('open');clearTimeout(c._t);c._t=setTimeout(()=>c.classList.remove('open'),2800)})}
+
+function toast(m,err){const t=$('#ts');t.textContent=m;t.className='on'+(err?' er':'');clearTimeout(tt);tt=setTimeout(()=>t.className='',2400)}
+async function call(path,q){try{const r=await fetch(path+(q?'?'+new URLSearchParams(q):''));if(!r.ok)throw 0;return r}catch(e){toast(tr('err_offline'),1);return null}}
+function ask(t,s,l,f,red){$('#sh-t').textContent=t;$('#sh-s').textContent=s;const b=$('#sh-ok');b.textContent=l;b.className='bt'+(red?' rd':'');b.onclick=()=>{shut();f()};$('#sh').classList.add('on')}
+function shut(){$('#sh').classList.remove('on')}
+
+function go(i){document.documentElement.style.setProperty('--d',i>cur?1:-1);cur=i;$$('.scr').forEach((s,j)=>s.classList.toggle('on',j==i));$$('nav button').forEach((b,j)=>b.classList.toggle('on',j==i));$('#ind').style.transform='translateX('+i*100+'%)';scrollTo(0,0)}
+
+function theme(p){ST.s('cuckoo_th',p);const l=p=='l'||(p=='auto'&&matchMedia('(prefers-color-scheme:light)').matches);document.documentElement.classList.toggle('l',l);$$('#th button').forEach(b=>b.classList.toggle('on',b.dataset.v==p))}
+theme(ST.g('cuckoo_th')||'auto');
+
+const OB=$('#ob'),W=['Coucou','Hello','Hola','Bonjour','Ciao','Hallo','こんにちは','Olá'];
+function greet(){const g=$('#gr');g.classList.add('f');setTimeout(()=>{gi=(gi+1)%W.length;g.textContent=W[gi];g.classList.remove('f')},380)}
+function obShow(n){st=n;$$('.st').forEach((e,i)=>{e.classList.toggle('on',i==n);e.classList.toggle('pv',i<n)});$$('.dots i').forEach((d,i)=>d.classList.toggle('on',i==n));obLabel();$('#obs').style.visibility=n==3?'hidden':'visible'}
+function obStart(){OB.hidden=false;OB.classList.remove('out');inOb=true;obShow(0);clearInterval(gt);gt=setInterval(greet,2100);setTimeout(cuckoo,1000);sync()}
+async function finish(save){if(save&&!await act.save())return;ST.s('cuckoo_ob',1);clearInterval(gt);inOb=false;OB.classList.add('out');setTimeout(()=>OB.hidden=true,700);sync()}
+
+/* ---------- Minuteur / Timer ---------- */
+let tmrEnd=0;
+function tmrUI(){const b=$('#tbt');if(!b)return;b.textContent=tr(tmrEnd?'tm_cancel':'tm_start');b.style.color=tmrEnd?'var(--rd)':''}
+function tmrTick(){
+const left=tmrEnd?Math.max(0,Math.round((tmrEnd-Date.now())/1000)):0;
+if(tmrEnd&&left==0){tmrEnd=0;toast(tr('tm_done'))}
+const h=Math.floor(left/3600),m=Math.floor(left%3600/60),s=left%60;
+$('#tl').textContent=tmrEnd?(h?h+':'+pad(m):pad(m))+':'+pad(s):'—';
+tmrUI()}
+async function tmrSync(){try{const r=await fetch('/timer',{cache:'no-store'});if(!r.ok)throw 0;const j=await r.json();tmrEnd=j.left>0?Date.now()+j.left*1000:0;tmrTick()}catch(e){}}
+setInterval(tmrTick,1000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)tmrSync()});
+
+const act={
+coucou:async()=>{cuckoo();await call('/coucou')},
+hold_out:async()=>{if(await call('/cuckoo_out')){$$('.clk').forEach(c=>{clearTimeout(c._t);c.classList.add('open')});toast(tr('t_out'))}},
+pull_in:async()=>{if(await call('/cuckoo_in')){$$('.clk').forEach(c=>{clearTimeout(c._t);c.classList.remove('open')});toast(tr('t_in'))}},
+tpre:a=>{$('#tmin').value=a.dataset.v},
+timer:async()=>{
+ if(tmrEnd){if(await call('/timer',{min:0})){tmrEnd=0;tmrTick();toast(tr('tm_cancelled'))}return}
+ const m=Math.max(1,Math.min(600,parseInt($('#tmin').value)||10));
+ $('#tmin').value=m;
+ const r=await call('/timer',{min:m});
+ if(r){let left=m*60;try{const j=await r.json();if(j.left>0)left=j.left}catch(e){}tmrEnd=Date.now()+left*1000;tmrTick();toast(tr('tm_set',m))}
+},
+starwars:async()=>{if(await call('/starwars'))toast(tr('force'))},
+test:async()=>{$$('.eq').forEach(q=>{q.classList.remove('play');void q.offsetWidth;q.classList.add('play')});await call('/test',{b1:S.b1,b2:S.b2,b3:S.b3,b4:S.b4,volume:S.volume})},
+save:async()=>{const q={};SK.forEach(k=>q[k]=S[k]);if(!await call('/set',q))return false;dirty=false;sync();toast(tr('saved'));return true},
+wifi:async()=>{if(await call('/setwifi',{ssid:S.ssid,password:S.password}))ask(tr('wifi_saved_t'),tr('wifi_saved_s'),tr('reboot_now'),act.reboot)},
+settime:async()=>{if(await call('/settime',{t:Math.floor(Date.now()/1e3),tz:-new Date().getTimezoneOffset()}))toast(tr('time_sent'))},
+copy:a=>{const v=a.dataset.v=='host'?'http://'+S.host+'.local':a.dataset.v;const t=document.createElement('textarea');t.value=v;document.body.appendChild(t);t.select();let ok=0;try{ok=document.execCommand('copy')}catch(e){}t.remove();toast(ok?tr('copied'):v)},
+eye:()=>{const p=$('#pw');p.type=p.type=='password'?'text':'password';eyeTxt()},
+th:a=>theme(a.dataset.v),
+lg:a=>lang(a.dataset.v),
+replay:()=>obStart(),
+rebootask:()=>ask(tr('rb_ask_t'),tr('rb_ask_s'),tr('rb_ask_ok'),act.reboot,1),
+reboot:async()=>{fetch('/reboot').catch(()=>{});$('#rb').classList.add('on');await new Promise(r=>setTimeout(r,4000));for(let i=0;i<30;i++){try{const r=await fetch('/',{cache:'no-store'});if(r.ok)break}catch(e){}await new Promise(r=>setTimeout(r,2000))}location.reload()},
+shut:shut,
+next:()=>st<3?obShow(st+1):finish(true),
+skip:()=>finish(false)
+};
+
+document.addEventListener('click',e=>{const t=e.target;let x;
+if(x=t.closest('.sw')){set(x.dataset.k,S[x.dataset.k]?0:1);buzz()}
+else if(x=t.closest('[data-p]')){x.dataset.p.split(',').forEach((v,i)=>S['b'+(i+1)]=+v);dirty=true;sync();buzz()}
+else if(x=t.closest('[data-tab]'))go(+x.dataset.tab);
+else if(x=t.closest('[data-a]')){buzz();act[x.dataset.a](x)}
+else if(t.closest('.clk'))cuckoo()});
+document.addEventListener('input',e=>{const t=e.target,k=t.dataset.k;if(k&&!t.classList.contains('sw'))set(k,(k=='ssid'||k=='password')?t.value:+t.value)});
+
+async function stat(){try{const r=await fetch('/status',{cache:'no-store'});if(!r.ok)throw 0;const j=await r.json();$('#stg').classList.add('show');
+$('#s-t').textContent=j.time||'—';
+$('#s-w').textContent=j.temp!=null?j.temp+' °C':'—';
+$('#s-h').textContent=j.hum!=null?j.hum+' %':'—';
+$('#s-c').textContent=j.cpu!=null?j.cpu+' °C':'—';
+$('#s-r').textContent=j.rssi!=null?tr(j.rssi>-60?'rssi_ex':j.rssi>-75?'rssi_ok':'rssi_weak')+' ('+j.rssi+' dBm)':'—';
+$('#s-u').textContent=j.up!=null?(j.up>=3600?Math.floor(j.up/3600)+' h '+pad(Math.floor(j.up%3600/60)):Math.floor(j.up/60)+' min'):'—';
+$('#s-total').textContent=j.total != null ? j.total.toLocaleString() : '—';
+$('#s-dist').textContent=j.distance_km != null ? j.distance_km + ' km' : '—';
+
+setTimeout(stat,10000)}catch(e){}}
+
+async function loadConfig() {
+    try {
+        const r = await fetch('/config');
+        S = await r.json();
+        sync();
+        stat();
+        tmrSync();
+        if(!ST.g('cuckoo_ob')) obStart();
+    } catch(e) {
+        toast(tr('cfg_err'), 1);
+    }
+}
+
+lang(ST.g('cuckoo_lang')||'auto');
+loadConfig();
+</script>
+</body>
+</html>

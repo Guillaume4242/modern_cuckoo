@@ -1,0 +1,19 @@
+# Old versions (not published)
+previous_versions/
+
+# Temporary Word / Office files
+~$*
+*.tmp
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Editors
+.vscode/
+.idea/
+
+# System
+.DS_Store
+Thumbs.db
