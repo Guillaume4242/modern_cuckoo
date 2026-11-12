@@ -11,6 +11,7 @@ Modern Cuckoo is a contemporary interpretation of the traditional cuckoo clock. 
 ▶ [Watch the demo video](docs/video/cuckoo_out.mp4)
 
 | ![The finished cuckoo clock](docs/images/cuckoo-figure.jpg) | ![The assembled mechanism](docs/images/assembled-mechanism.jpg) |
+|:---:|:---:|
 | *The finished cuckoo clock with its decorative cover* | *The assembled mechanism with servo, buzzer and ESP32* |
 
 ## Features
@@ -37,7 +38,7 @@ The result is a connected cuckoo clock that can be customized both mechanically 
 - SG90 servo motor
 - Passive buzzer
 - USB-C 5 V power source
-- Oled SSD1306 is optionnal
+- Oled SSD1306 is optional
 - Screws: M2x8 and M2x10
 - Dupont cables or wires, with soldering or mechanical connection
 
@@ -175,6 +176,7 @@ This project is licensed under a **Standard Digital File License**: you may buil
 /timer?min=10
 /set?volume=800&half=1
 /test?b1=262&b2=294&b3=330&b4=392&volume=800
+```
 
 ### Example Status Response
 
@@ -193,6 +195,7 @@ This project is licensed under a **Standard Digital File License**: you may buil
 
 ### Home Automation
 
+The API has no authentication. Use it on a trusted home network only, and never expose it to the internet.
 Compatible with:
 
 - Home Assistant
